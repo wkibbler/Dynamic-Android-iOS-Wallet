@@ -18,7 +18,7 @@ export default class Home extends React.Component {
       super()
       this.state = {
          BTCprice: '0.00000000',
-         XUEZprice: '0.00000000',
+         Dynamicprice: '0.00000000',
          blockHeight: '0',
          fontLoaded: false
       }
@@ -43,7 +43,7 @@ export default class Home extends React.Component {
       </View>
       <Text style={styles.balance1}>BALANCE</Text>
       <Text style={[styles.balanceTitle, {fontFamily: 'made-evolve-light'}]}>0.00000</Text>
-      <Text style={[styles.balance1, {marginTop: 5}]}>XUEZ</Text>
+      <Text style={[styles.balance1, {marginTop: 5}]}>Dynamic</Text>
       <View style={styles.btnContainers}>
       <View style={styles.stBtnCon}>
       <GradientButton
@@ -98,7 +98,7 @@ export default class Home extends React.Component {
       <Text style={styles.stats}> Price </Text>
       </Text>
       <Text style={styles.stats}>
-      <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>XUEZ</Text>
+      <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>Dynamic</Text>
       <Text style={styles.stats}>  Price </Text>
       </Text>
       <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>Block Height </Text>
@@ -108,7 +108,7 @@ export default class Home extends React.Component {
       <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>{this.state.BTCprice}</Text>
       </Text>
       <Text style={styles.stats}>
-      <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>{this.state.XUEZprice}</Text>
+      <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>{this.state.Dynamicprice}</Text>
       </Text>
       <Text style={[styles.stats, {fontFamily: 'made-evolve-light'}]}>{this.state.blockHeight}</Text>
       </View>
