@@ -23,7 +23,7 @@ export default {
       paddingRight : 10
   },
   logo: {
-    width: 90,
+    width: 110,
     height: 110,
     marginTop: '75%'
   },

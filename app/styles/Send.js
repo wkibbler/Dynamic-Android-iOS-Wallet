@@ -32,7 +32,7 @@ export default {
     alignItems: 'center'
   },
   balance: {
-    backgroundColor: '#202651',
+    backgroundColor: '#5a1277',
     borderRadius: 30,
     width: '80%',
     height: 60,
@@ -58,7 +58,7 @@ export default {
     borderBottomLeftRadius: 15,
     borderTopLeftRadius: 15,
     color: 'white',
-    backgroundColor: '#202651',
+    backgroundColor: '#5a1277',
     fontFamily: 'made-evolve-thin'
   },
   inputWrapper: {
@@ -127,4 +127,8 @@ export default {
     color: 'rgba(255,255,255,0.8)',
     fontSize: 18,
   },
+  disFee: {
+    textAlign: 'center',
+    color: 'grey'
+  }
 }

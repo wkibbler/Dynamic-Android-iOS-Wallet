@@ -157,5 +157,36 @@ export default {
      padding: 30,
      color: '#1b3069',
      textAlign: 'center'
-   }
+   },
+   modal: {
+     flex: 1,
+     alignItems: 'center',
+     flexDirection: 'row',
+     justifyContent:'center'
+   },
+   modal1: {
+     width: '80%',
+     height: '70%',
+     backgroundColor: 'white',
+     alignItems: 'center',
+     borderRadius: 30,
+     backgroundColor: '#5a1277'
+   },
+   modalMsg: {
+     color: 'white',
+     paddingLeft: 15,
+     paddingRight: 15,
+     textAlign: 'center',
+     fontSize: 12,
+     marginTop: 10
+   },
+   input: {
+     width: '60%',
+     height: 30,
+     borderRadius: 15,
+     color: 'black',
+     backgroundColor: 'white',
+     fontFamily: 'made-evolve-thin',
+     marginTop: 30
+   },
 }

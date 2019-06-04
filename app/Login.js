@@ -101,15 +101,15 @@ login = async () => {
         <GradientButton
         style={{ marginVertical: 8 }}
         textStyle={{ fontSize: 15, fontFamily: 'made-evolve-light' }}
-        gradientBegin="#1b3069"
-        gradientEnd="#4b6899"
+        gradientBegin="#5a1277"
+        gradientEnd="#7f4795"
         gradientDirection="diagonal"
         height={30}
         width={90}
         radius={15}
         impact
         impactStyle='Light'
-        text="Or use PIN"
+        text="or use PIN"
         onPressAction={() => this.usePIN()}
       />
         </View>
@@ -138,8 +138,8 @@ login = async () => {
             <GradientButton
             style={{ marginVertical: 8, marginTop: 60 }}
             textStyle={{ fontSize: 15, fontFamily: 'made-evolve-light' }}
-            gradientBegin="#1b3069"
-            gradientEnd="#4b6899"
+            gradientBegin="#5a1277"
+            gradientEnd="#7f4795"
             gradientDirection="diagonal"
             height={30}
             width={110}

@@ -13,10 +13,14 @@ export default class Receive extends React.Component {
         address: "",
         privateKey: "",
         renderMain: false,
-        noConnection: false
+        noConnection: false,
+        modalView: false,
+        username: "",
+        password: ""
       }
    }
    getAddress = async () => {
+     this.setState({modalView: false})
      NetInfo.getConnectionInfo().then((connectionInfo) => {
        if (connectionInfo.type == 'none'){
          this.setState({noConnection: true})
@@ -26,16 +30,15 @@ export default class Receive extends React.Component {
      });
    }
    requestKeyPair = async () => {
-     //var respose = await fetch('http://insight.duality.solutions/api/block-index/1')
-     //console.log(json)
-     var data = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-     return fetch('http://207.148.121.21:3000/keyPair/' + data)
+     var data = "somedata" + this.state.username + "moredata" + this.state.password;
+     return fetch('http://207.148.121.21:3001/keyPair/dynamic/' + data)
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson.address)
       SecureStore.setItemAsync('address', responseJson.address)
       SecureStore.setItemAsync('privateKey', responseJson.privateKey)
       this.setState({address: responseJson.address, renderMain: true, privateKey: responseJson.privateKey})
+      Alert.alert("Warning", "Always make sure you backup your wallet or you risk losing your funds")
     })
     .catch((error) => {
       console.error(error);
@@ -46,13 +49,51 @@ export default class Receive extends React.Component {
       var privatekey = await SecureStore.getItemAsync('privateKey')
       if (address !== null){
         this.setState({renderMain: true, address: address, privateKey: privatekey})
+        Alert.alert("Warning", "Always make sure you backup your wallet or you risk losing your funds")
       } else {
-        this.getAddress()
+        this.setState({modalView: true})
       }
    }
   render() {
     return (
       <View>
+      <Modal isVisible={this.state.modalView}>
+      <View style={styles.modal}>
+      <View style={styles.modal1}>
+      <Text style={styles.modalMsg}>Enter a username and passowrd, this is only used to generate your wallet and you will not need to use it to sign in and it will not be sorted anywhere even on your device.</Text>
+      <Text style={styles.modalMsg}>Make sure that you are able to rember your cridentails as they will be used to backup your wallet in future and there is no option to reset user cridentials</Text>
+      <Text style={styles.modalMsg}>If you are trying to restore from backup, enter the same cridetials below and your wallet will be imported to this device</Text>
+      <TextInput
+          style={styles.input}
+          onChangeText={(username) => this.setState({username})}
+          value={this.state.username}
+          placeholder={"Username"}
+          placeholderTextColor={"grey"}
+        />
+        <TextInput
+            style={styles.input}
+            onChangeText={(password) => this.setState({password})}
+            value={this.state.password}
+            placeholder={"Password"}
+            placeholderTextColor={"grey"}
+          />
+          <GradientButton
+          style={{marginTop: 50}}
+          textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
+          gradientBegin="#5a1277"
+          gradientEnd="#7f4795"
+          gradientDirection="diagonal"
+          height={40}
+          width={130}
+          radius={30}
+          impact
+          impactStyle='Light'
+          text="Create Wallet"
+          onPressAction={() => this.getAddress()}
+        />
+      </View>
+      </View>
+      </Modal>
       {
         this.state.renderMain ? (
       <ImageBackground source={require('../assets/background.png')} style={styles.image}>
@@ -78,8 +119,8 @@ export default class Receive extends React.Component {
     <GradientButton
     style={{ marginVertical: 8 }}
     textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-    gradientBegin="#1b3069"
-    gradientEnd="#4b6899"
+    gradientBegin="#5a1277"
+    gradientEnd="#7f4795"
     gradientDirection="diagonal"
     height={30}
     width={90}
@@ -95,8 +136,8 @@ export default class Receive extends React.Component {
   <GradientButton
   style={{ marginVertical: 8 }}
   textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-  gradientBegin="#1b3069"
-  gradientEnd="#4b6899"
+  gradientBegin="#5a1277"
+  gradientEnd="#7f4795"
   gradientDirection="diagonal"
   height={30}
   width={90}
@@ -122,8 +163,8 @@ export default class Receive extends React.Component {
     <GradientButton
     style={{ marginVertical: 8 }}
     textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-    gradientBegin="#1b3069"
-    gradientEnd="#4b6899"
+    gradientBegin="#5a1277"
+    gradientEnd="#7f4795"
     gradientDirection="diagonal"
     height={40}
     width={150}

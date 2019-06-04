@@ -7,7 +7,6 @@ import Home from './Home';
 import Send from './Send';
 import Receive from './Receive';
 import Settings from './Settings';
-import QrReader from './QrReader';
 
 const RootStack = createStackNavigator({
     Login: {
@@ -36,12 +35,6 @@ const RootStack = createStackNavigator({
     },
     Settings: {
       screen: Settings,
-      navigationOptions: {
-        header: null,
-      }
-    },
-    QrReader: {
-      screen: QrReader,
       navigationOptions: {
         header: null,
       }

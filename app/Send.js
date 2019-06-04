@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, View, ImageBackground, Button, Alert, TouchableOpacity, Image, TextInput, Slider, StyleSheet,         Linking, Dimensions, LayoutAnimation, StatusBar } from 'react-native';
+import { Text, View, ImageBackground, Button, Alert, TouchableOpacity, Image, TextInput, StyleSheet, Linking, Dimensions, LayoutAnimation, StatusBar } from 'react-native';
 import GradientButton from 'react-native-gradient-buttons';
-import { Font, Permissions, BarCodeScanner } from 'expo';
+import { Font, Permissions, BarCodeScanner, SecureStore } from 'expo';
 import Modal from 'react-native-modal';
 
 
@@ -18,15 +18,27 @@ export default class Send extends React.Component {
          address: "",
          amount: values.amount.toFixed(4),
          question: 4,
-         fee: 0.0001,
+         fee: 0.00031543,
          balance: values.balance.toFixed(4),
          qrReader: false,
          hasCameraPermission: null,
          lastScannedUrl: null
       }
    }
-
-
+   send = async () => {
+     var address = await SecureStore.getItemAsync('address')
+     var privKey = await SecureStore.getItemAsync('privateKey')
+     var sendJson = {send: this.state.address, from: address, privKey: privKey, amount: this.state.amount, balance: this.state.balance * 100000000}
+     console.log(JSON.stringify(sendJson))
+     return fetch('http://207.148.121.21:3001/send/dynamic/' + JSON.stringify(sendJson))
+     .then((response) => response.json())
+     .then((responseJson) => {
+       Alert.alert(responseJson.alert, responseJson.message)
+     })
+     .catch((error) => {
+       Alert.alert("error", "There was an error reaching our server")
+     });
+   }
    _openQrScanner = () => {
      this._requestCameraPermission();
      //Alert.alert("Swipe left to go back or click on the address displyed below after scan to use")
@@ -46,17 +58,36 @@ export default class Send extends React.Component {
        this.setState({ lastScannedUrl: result.data, qrReader: false, address: result.data });
      }
    };
-
-
-
-
    onValueChange(value) {
     this.setState({ question: value });
     this.setState({fee: value.toFixed(4)})
   }
   sendMax(){
-    this.setState({amount: this.state.balance})
+    this.setState({amount: JSON.stringify(this.state.balance - this.state.fee)})
   }
+  async balance(){
+    var address = await SecureStore.getItemAsync('address')
+    if (address !== null){
+      return fetch('http://insight.duality.solutions/api/addr/' + address + "/balance")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        if (typeof responseJson == 'number'){
+          this.setState({balance: (responseJson / 100000000).toFixed(4)})
+        } else {
+          this.setState({balance: (0).toFixed(4)})
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    } else {
+      this.setState({balance: (0).toFixed(4)})
+    }
+    }
+    componentDidMount(){
+      this.balance()
+      this.interval = setInterval(() => this.balance(), 10000);
+    }
   render() {
     return (
       <View>
@@ -110,27 +141,14 @@ export default class Send extends React.Component {
         </TouchableOpacity>
         </View>
         <View style={styles.sliderWrapper}>
-        <Slider
-          minimumValue={0.0001}
-          maximumValue={0.1}
-          minimumTrackTintColor="#1b3069"
-          maximumTractTintColor="#4b6899"
-          step={0.0001}
-          value={0}
-          onValueChange={value =>
-            this.onValueChange(value)
-          }
-          style={styles.slider}
-          thumbTintColor="#1EB1FC"
-        />
         <Text style={styles.feeDis}>{"Fee: " + this.state.fee}</Text>
         </View>
         <View style={styles.sendWrapper}>
         <GradientButton
         style={styles.sendBtn}
         textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-        gradientBegin="#1b3069"
-        gradientEnd="#4b6899"
+        gradientBegin="#5a1277"
+        gradientEnd="#7f4795"
         gradientDirection="diagonal"
         height={40}
         width={100}
@@ -138,7 +156,7 @@ export default class Send extends React.Component {
         impact
         impactStyle='Light'
         text="Send"
-        onPressAction={() => Alert.alert("Sent")}
+        onPressAction={() => this.send()}
       />
         </View>
     </View>

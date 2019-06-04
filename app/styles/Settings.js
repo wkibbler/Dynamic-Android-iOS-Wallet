@@ -34,7 +34,7 @@ export default {
   container: {
       padding: 10,
       marginTop: 20,
-      backgroundColor: '#202651',
+      backgroundColor: '#5a1277',
       alignItems: 'center',
       borderRadius: 30
    },
@@ -54,7 +54,7 @@ export default {
      backgroundColor: 'white',
      alignItems: 'center',
      borderRadius: 30,
-     backgroundColor: '#202651'
+     backgroundColor: '#5a1277'
    },
    warningIcon: {
      width: 104,

@@ -2,16 +2,13 @@ import React from 'react';
 import { Text, View, ImageBackground, Button, Alert, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native';
 import GradientButton from 'react-native-gradient-buttons';
 import Modal from 'react-native-modal';
+import { SecureStore } from 'expo'
 
 import styles from './styles/Settings'
 
 export default class Settings extends React.Component {
   state = {
       names: [
-         {
-            id: 0,
-            name: 'Restore from Backup',
-         },
          {
             id: 1,
             name: 'Delete Wallet',
@@ -28,11 +25,14 @@ export default class Settings extends React.Component {
      this.setState({ isRestoreWarningVisible: !this.state.isRestoreWarningVisible});
    }
    onPresses = (item) => {
-      if (item.id == 0){
-        this.RestoreWarning()
-      } else if (item.id == 1){
+     if (item.id == 1){
         this.DeleteWarning()
       }
+   }
+   deleteWallet = () => {
+     SecureStore.deleteItemAsync("address")
+     SecureStore.deleteItemAsync("privateKey")
+     Alert.alert("Sucsess", "Address and private key have been removed from device")
    }
   render() {
     return (
@@ -75,8 +75,8 @@ export default class Settings extends React.Component {
     <GradientButton
     style={styles.deleteBtn}
     textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-    gradientBegin="#1b3069"
-    gradientEnd="#4b6899"
+    gradientBegin="#5a1277"
+    gradientEnd="#7f4795"
     gradientDirection="diagonal"
     height={40}
     width={130}
@@ -85,46 +85,10 @@ export default class Settings extends React.Component {
     impactStyle='Light'
     text="Delete Wallet"
     onPressAction={() => {
+      this.deleteWallet()
       this.DeleteWarning()
     }}
   />
-    </View>
-    </View>
-    </Modal>
-    <Modal isVisible={this.state.isRestoreWarningVisible}>
-    <View style={styles.warningModal}>
-    <View style={styles.restoreModal}>
-    <Text style={styles.warningMsg2}>This is will delete all wallet data from you device</Text>
-    <Text style={styles.restoreInstructions}><Text>Paste your private key below and press</Text><Text style={styles.restore}> restore</Text></Text>
-    <ScrollView contentContainerStyle={{flexGrow: 1}}
-    keyboardShouldPersistTaps='handled'
-    style={{alignItems: 'center',  width: '100%'}}
-    >
-    <TextInput
-        style={styles.restoreInput}
-        onChangeText={(restore1) => this.setState({restore1})}
-        value={this.state.restore1}
-      />
-      <Text style={styles.goBack1} onPress={() => this.RestoreWarning()}>Go Back</Text>
-      <View style={{alignItems: 'center'}}>
-      <GradientButton
-      style={{marginTop: 30}}
-      textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-      gradientBegin="#1b3069"
-      gradientEnd="#4b6899"
-      gradientDirection="diagonal"
-      height={50}
-      width={150}
-      radius={30}
-      impact
-      impactStyle='Light'
-      text="Restore"
-      onPressAction={() => {
-        this.RestoreWarning()
-      }}
-    />
-    </View>
-      </ScrollView>
     </View>
     </View>
     </Modal>
