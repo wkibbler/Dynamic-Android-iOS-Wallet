@@ -2,7 +2,7 @@
 
 ![DYN logo](https://github.com/duality-solutions/Dynamic/blob/master/src/qt/res/icons/drk/about.png)
 
-**Copyright (c) 2016-2018 [Duality Blockchain Solutions](https://duality.solutions/)**
+**Copyright (c) 2016-2019 [Duality Blockchain Solutions](https://duality.solutions/)**
 
 Dynamic Android/iOS Mobile Wallet Features
 ----------------
