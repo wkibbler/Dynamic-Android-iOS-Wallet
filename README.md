@@ -1,13 +1,3 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-[![Build Status](https://travis-ci.org/duality-solutions/Dynamic-Android-iOS-Wallet.png?branch=master)](https://travis-ci.org/duality-solutions/Dynamic-Android-iOS-Wallet)
-[![Stories in Ready](https://badge.waffle.io/duality-solutions/Dynamic-Android-iOS-Wallet.png?label=ready&title=Ready)](https://waffle.io/duality-solutions/Dynamic-Android-iOS-Wallet)
-
-Graph on Pull Request History
-====================================
-
-[![Throughput Graph](https://graphs.waffle.io/duality-solutions/Dynamic-Android-iOS-Wallet/throughput.svg)](https://waffle.io/duality-solutions/Dynamic-Android-iOS-Wallet/metrics/throughput)  
-
 # **Dynamic (DYN) Android/iOS Mobile Wallet v1.0.1**
 
 ![DYN logo](https://github.com/duality-solutions/Dynamic/blob/master/src/qt/res/icons/drk/about.png)
