@@ -60,9 +60,9 @@ export default class Receive extends React.Component {
       <Modal isVisible={this.state.modalView}>
       <View style={styles.modal}>
       <View style={styles.modal1}>
-      <Text style={styles.modalMsg}>Enter a username and passowrd, this is only used to generate your wallet and you will not need to use it to sign in and it will not be sorted anywhere even on your device.</Text>
-      <Text style={styles.modalMsg}>Make sure that you are able to rember your cridentails as they will be used to backup your wallet in future and there is no option to reset user cridentials</Text>
-      <Text style={styles.modalMsg}>If you are trying to restore from backup, enter the same cridetials below and your wallet will be imported to this device</Text>
+      <Text style={styles.modalMsg}>Enter a username and password, this is only used to generate your wallet and you will not need to use it to sign in and it will not be stored anywhere even on your device.</Text>
+      <Text style={styles.modalMsg}>Make sure that you are able to remember your credentials as they will be used to backup your wallet in future and there is no option to reset user credentials</Text>
+      <Text style={styles.modalMsg}>If you are trying to restore from backup, enter the same credentials below and your wallet will be imported to this device</Text>
       <TextInput
           style={styles.input}
           onChangeText={(username) => this.setState({username})}
