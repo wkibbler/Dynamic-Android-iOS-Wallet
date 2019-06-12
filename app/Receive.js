@@ -16,8 +16,16 @@ export default class Receive extends React.Component {
         noConnection: false,
         modalView: false,
         username: "",
-        password: ""
+        password: "",
+        qrCodeSize: 100
       }
+   }
+   qrSize = () => {
+     if (this.state.qrCodeSize == 100){this.setState({qrCodeSize: 200})} else {this.setState({qrCodeSize: 100})}
+   }
+   cancel = () => {
+     this.setState({modalView: false})
+     this.props.navigation.navigate('Home')
    }
    getAddress = async () => {
      this.setState({modalView: false})
@@ -77,8 +85,9 @@ export default class Receive extends React.Component {
             placeholder={"Password"}
             placeholderTextColor={"grey"}
           />
+          <Text style={styles.goBack1} onPress={()=> this.cancel()}>Go Back</Text>
           <GradientButton
-          style={{marginTop: 50}}
+          style={{marginTop: 30}}
           textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
           gradientBegin="#5a1277"
           gradientEnd="#7f4795"
@@ -110,9 +119,12 @@ export default class Receive extends React.Component {
     <View style={styles.op1}>
     <Text style={styles.title}>RECEIVE</Text>
     <View style={styles.qrWrapper}>
+    <TouchableOpacity onPress={() => this.qrSize()}>
     <QRCode
       value={this.state.address}
+      size={this.state.qrCodeSize}
     />
+    </TouchableOpacity>
     </View>
     <Text style={styles.disAddress}>{this.state.address}</Text>
     <View style={styles.recBtnWrapper}>

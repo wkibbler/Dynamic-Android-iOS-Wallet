@@ -19,6 +19,7 @@ const RootStack = createStackNavigator({
       screen: Home,
       navigationOptions: {
         header: null,
+        gesturesEnabled: false
       }
     },
     Send: {

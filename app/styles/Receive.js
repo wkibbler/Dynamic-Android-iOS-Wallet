@@ -124,7 +124,7 @@ export default {
    },
    qrWrapper: {
      alignItems: 'center',
-     marginTop: 20
+     marginTop: 20,
    },
    title: {
      textAlign: 'center',
@@ -189,4 +189,10 @@ export default {
      fontFamily: 'made-evolve-thin',
      marginTop: 30
    },
+   goBack1: {
+     color: 'white',
+     textAlign: 'center',
+     marginTop: 30,
+     fontFamily: 'made-evolve-light'
+   }
 }

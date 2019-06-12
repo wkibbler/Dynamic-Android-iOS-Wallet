@@ -29,6 +29,21 @@ export default class Settings extends React.Component {
         this.DeleteWarning()
       }
    }
+   delete1 = () => {
+     Alert.alert(
+  'Are you sure',
+  'This will remove your wallet data from this device',
+  [
+    {
+      text: 'Cancel',
+      onPress: () => console.log(''),
+      style: 'cancel',
+    },
+    {text: 'Yes delete it', onPress: () => this.deleteWallet()},
+  ],
+  {cancelable: false},
+);
+   }
    deleteWallet = () => {
      SecureStore.deleteItemAsync("address")
      SecureStore.deleteItemAsync("privateKey")
@@ -49,6 +64,8 @@ export default class Settings extends React.Component {
       style={styles.backIcon}/>
       </TouchableOpacity>
     <View style={styles.op1}>
+    <Text style={styles.advanced}>Advanced Settings</Text>
+    <View style={styles.line}/>
     {
                this.state.names.map((item, index) => (
                   <TouchableOpacity
@@ -68,15 +85,15 @@ export default class Settings extends React.Component {
     source={require('../assets/warning.png')}
     style={styles.warningIcon}/>
     <Text style={styles.warningMsg}>Warning</Text>
-    <Text style={styles.warningMsg1}>This is will delete all wallet data from you device</Text>
+    <Text style={styles.warningMsg1}>This will delete all wallet data from you device</Text>
     <TouchableOpacity style={styles.goBack} onPress={() => this.DeleteWarning()}>
     <Text style={styles.goBackText}>Go Back</Text>
     </TouchableOpacity>
     <GradientButton
     style={styles.deleteBtn}
     textStyle={{ fontSize: 15, fontFamily: 'made-evolve-thin' }}
-    gradientBegin="#5a1277"
-    gradientEnd="#7f4795"
+    gradientBegin="red"
+    gradientEnd="red"
     gradientDirection="diagonal"
     height={40}
     width={130}
@@ -85,7 +102,7 @@ export default class Settings extends React.Component {
     impactStyle='Light'
     text="Delete Wallet"
     onPressAction={() => {
-      this.deleteWallet()
+      this.delete1()
       this.DeleteWarning()
     }}
   />

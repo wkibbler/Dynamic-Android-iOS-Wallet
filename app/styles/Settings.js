@@ -54,7 +54,7 @@ export default {
      backgroundColor: 'white',
      alignItems: 'center',
      borderRadius: 30,
-     backgroundColor: '#5a1277'
+     backgroundColor: '#808080'
    },
    warningIcon: {
      width: 104,
@@ -64,7 +64,7 @@ export default {
    warningMsg1: {
      textAlign: 'center',
      marginTop: 20,
-     color: 'white',
+     color: 'red',
      fontFamily: 'made-evolve-thin',
      padding: 30
    },
@@ -124,5 +124,16 @@ export default {
    },
    restore: {
      fontFamily: 'made-evolve-light'
+   },
+   advanced: {
+     textAlign: 'center',
+     color: 'white',
+     fontFamily: 'made-evolve-light',
+     marginTop: 20
+   },
+   line: {
+     borderBottomColor: 'white',
+     borderBottomWidth: 2,
+     marginTop: 20
    }
 }

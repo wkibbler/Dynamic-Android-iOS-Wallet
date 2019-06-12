@@ -75,8 +75,8 @@ login = async () => {
   async componentDidMount(){
     this.login()
     await Font.loadAsync({
-      'made-evolve-thin': require('../assets/fonts/made-evolve-thin.ttf'),
-      'made-evolve-light': require('../assets/fonts/made-evolve-light.ttf')
+      'made-evolve-thin': require('../assets/fonts/Poppins-Light.ttf'),
+      'made-evolve-light': require('../assets/fonts/Poppins-Regular.ttf')
     });
 
     this.setState({ fontLoaded: true });
@@ -126,6 +126,7 @@ login = async () => {
             placeholder={"Enter a PIN"}
             placeholderTextColor={"white"}
             keyboardType={"numeric"}
+            secureTextEntry={true}
           />
           <TextInput
               style={styles.input}
@@ -134,6 +135,7 @@ login = async () => {
               placeholder={"Confirm PIN"}
               placeholderTextColor={"white"}
               keyboardType={"numeric"}
+              secureTextEntry={true}
             />
             <GradientButton
             style={{ marginVertical: 8, marginTop: 60 }}
@@ -163,6 +165,7 @@ login = async () => {
             placeholder={"Enter PIN"}
             placeholderTextColor={"white"}
             keyboardType={"numeric"}
+            secureTextEntry={true}
           />
             <GradientButton
             style={{ marginVertical: 8, marginTop: 60 }}

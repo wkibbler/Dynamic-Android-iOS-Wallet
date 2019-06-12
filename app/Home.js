@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
   Text,
   View,
@@ -32,7 +33,7 @@ export default class Home extends React.Component {
      Linking.openURL('http://insight.duality.solutions/tx/' + txid)
    }
    sendReceive(variable){
-     if (variable == this.state.address) {return "SENT"} else {return "RECIEVED"}
+     if (variable == this.state.address) {return "SENT"} else {return "RECEIVED"}
    }
    async balance(){
      var address = await SecureStore.getItemAsync('address')
@@ -45,8 +46,7 @@ export default class Home extends React.Component {
        })
        .catch((error) => {
          this.setState({balance: (0).toFixed(4)});
-         Alert.alert("There was an error obtaining balance")
-       });
+       })
      } else {
        this.setState({balance: (0).toFixed(4)})
      }
@@ -69,8 +69,8 @@ export default class Home extends React.Component {
      }
    async componentDidMount() {
      await Font.loadAsync({
-       'made-evolve-thin': require('../assets/fonts/made-evolve-thin.ttf'),
-       'made-evolve-light': require('../assets/fonts/made-evolve-light.ttf')
+       'made-evolve-thin': require('../assets/fonts/Poppins-Light.ttf'),
+       'made-evolve-light': require('../assets/fonts/Poppins-Regular.ttf')
      });
      this.setState({ fontLoaded: true });
      this.balance()

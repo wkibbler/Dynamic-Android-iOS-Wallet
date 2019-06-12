@@ -32,7 +32,6 @@ export default {
     alignItems: 'center'
   },
   balance: {
-    backgroundColor: '#5a1277',
     borderRadius: 30,
     width: '80%',
     height: 60,

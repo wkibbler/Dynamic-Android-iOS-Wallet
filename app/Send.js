@@ -3,6 +3,7 @@ import { Text, View, ImageBackground, Button, Alert, TouchableOpacity, Image, Te
 import GradientButton from 'react-native-gradient-buttons';
 import { Font, Permissions, BarCodeScanner, SecureStore } from 'expo';
 import Modal from 'react-native-modal';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 
 import styles from './styles/Send';
@@ -16,13 +17,14 @@ export default class Send extends React.Component {
       }
       this.state = {
          address: "",
-         amount: values.amount.toFixed(4),
+         amount: "",
          question: 4,
          fee: 0.00031543,
          balance: values.balance.toFixed(4),
          qrReader: false,
          hasCameraPermission: null,
-         lastScannedUrl: null
+         lastScannedUrl: null,
+         spinner: false
       }
    }
    send = async () => {
@@ -33,9 +35,11 @@ export default class Send extends React.Component {
      return fetch('http://207.148.121.21:3001/send/dynamic/' + JSON.stringify(sendJson))
      .then((response) => response.json())
      .then((responseJson) => {
+       this.setState({spinner: false})
        Alert.alert(responseJson.alert, responseJson.message)
      })
      .catch((error) => {
+       this.setState({spinner: false})
        Alert.alert("error", "There was an error reaching our server")
      });
    }
@@ -91,6 +95,12 @@ export default class Send extends React.Component {
   render() {
     return (
       <View>
+      <Spinner
+          visible={this.state.spinner}
+          textContent={''}
+          textStyle={styles.spinnerTextStyle}
+          overlayColor={'rgba(0,0,0,0.6)'}
+        />
       <ImageBackground
       style={styles.backgroundImage}
       source={require('../assets/background.png')}>
@@ -108,7 +118,7 @@ export default class Send extends React.Component {
     <Text style={styles.title}>SEND</Text>
     <View style={styles.balanceWrapper}>
     <View style={styles.balance}>
-    <Text style={styles.balanceDis}>{this.state.balance}</Text>
+    <Text style={styles.balanceDis}>{"Balance: " + this.state.balance}</Text>
     </View>
     </View>
     <View style={styles.inputWrapper}>
@@ -118,6 +128,7 @@ export default class Send extends React.Component {
         value={this.state.address}
         placeholder={"Enter Address"}
         placeholderTextColor={"white"}
+        clearButtonMode="always"
       />
       <TouchableOpacity onPress={() => {
         this._openQrScanner()
@@ -133,6 +144,9 @@ export default class Send extends React.Component {
           style={styles.input}
           onChangeText={(amount) => this.setState({amount})}
           value={this.state.amount}
+          placeholder={"Enter Amount"}
+          keyboardType={"numeric"}
+          placeholderTextColor={"white"}
         />
         <TouchableOpacity onPress={() => this.sendMax()}>
         <Image
@@ -141,7 +155,7 @@ export default class Send extends React.Component {
         </TouchableOpacity>
         </View>
         <View style={styles.sliderWrapper}>
-        <Text style={styles.feeDis}>{"Fee: " + this.state.fee}</Text>
+        <Text style={styles.feeDis}>{"Transaction Fee: " + this.state.fee}</Text>
         </View>
         <View style={styles.sendWrapper}>
         <GradientButton
@@ -156,7 +170,11 @@ export default class Send extends React.Component {
         impact
         impactStyle='Light'
         text="Send"
-        onPressAction={() => this.send()}
+        onPressAction={() => {
+          this.send()
+          this.setState({spinner: true, address: "Enter Address", amount: "Enter Amount"})
+        }
+        }
       />
         </View>
     </View>
