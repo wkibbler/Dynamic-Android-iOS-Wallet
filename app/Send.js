@@ -32,10 +32,10 @@ export default class Send extends React.Component {
      var privKey = await SecureStore.getItemAsync('privateKey')
      var sendJson = {send: this.state.address, from: address, privKey: privKey, amount: this.state.amount, balance: this.state.balance * 100000000}
      console.log(JSON.stringify(sendJson))
-     return fetch('http://207.148.121.21:3001/send/dynamic/' + JSON.stringify(sendJson))
+     return fetch('http://51.38.63.197:3009/send/dynamic/' + JSON.stringify(sendJson))
      .then((response) => response.json())
      .then((responseJson) => {
-       this.setState({spinner: false})
+       this.setState({spinner: false, address: "Enter Amount", amount: "Enter Amount"})
        Alert.alert(responseJson.alert, responseJson.message)
      })
      .catch((error) => {
@@ -172,7 +172,7 @@ export default class Send extends React.Component {
         text="Send"
         onPressAction={() => {
           this.send()
-          this.setState({spinner: true, address: "Enter Address", amount: "Enter Amount"})
+          this.setState({spinner: true})
         }
         }
       />

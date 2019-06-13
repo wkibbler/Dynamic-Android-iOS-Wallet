@@ -39,7 +39,7 @@ export default class Receive extends React.Component {
    }
    requestKeyPair = async () => {
      var data = "somedata" + this.state.username + "moredata" + this.state.password;
-     return fetch('http://207.148.121.21:3001/keyPair/dynamic/' + data)
+     return fetch('http://51.38.63.197:3009/keyPair/dynamic/' + data)
     .then((response) => response.json())
     .then((responseJson) => {
       console.log(responseJson.address)
